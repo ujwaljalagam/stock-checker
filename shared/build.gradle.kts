@@ -8,21 +8,24 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
-
-    // Used by :server
-    jvm()
+    jvm {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
+    }
 
     // Used by :androidApp
     android {
         namespace = "app.stockchecker.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
-        compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
     }
 
     // Used by iosApp (framework "Shared")
-    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach { target ->
+    listOf(iosArm64(), iosSimulatorArm64()).forEach { target ->
         target.binaries.framework {
             baseName = "Shared"
             isStatic = true

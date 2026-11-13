@@ -43,7 +43,7 @@ stock-checker/
 
 ## Versions
 
-Kotlin 2.4.21 · Gradle 9.9.1 · Android Gradle Plugin 9.5.1 (built-in Kotlin + `com.android.kotlin.multiplatform.library`) ·
+Kotlin 2.4.21 · Gradle 9.9.1 · Android Gradle Plugin 9.4.1 (built-in Kotlin + `com.android.kotlin.multiplatform.library`) ·
 Ktor 3.6.1 · Compose BOM 2026.09.00 · Exposed 1.6.1 · Flyway 13.12.2 · compileSdk 37 / targetSdk 36 / minSdk 26 · iOS 16.4+
 
 ## Prerequisites
