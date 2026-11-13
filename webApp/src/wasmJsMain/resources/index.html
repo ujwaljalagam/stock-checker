@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Stock Checker</title>
+  <meta name="theme-color" content="#0f766e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Stock Checker">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/push.js"></script>
+  <script src="/webApp.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>📦 Stock Checker</h1>
+  <div id="account" hidden><span id="account-email"></span> <button id="sign-out" class="link">Sign out</button></div>
+</header>
+
+<main>
+  <div id="loading" class="banner" hidden>Loading…</div>
+  <div id="error" class="banner error" hidden></div>
+  <div id="info" class="banner info" hidden></div>
+
+  <section id="signin" hidden>
+    <h2>Get an alert when it's on the shelf</h2>
+    <p>Watch products at stores near you. We'll notify you the moment they're back in stock.</p>
+    <form id="email-form">
+      <label>Email <input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+      <button type="submit">Email me a sign-in code</button>
+    </form>
+  </section>
+
+  <section id="code" hidden>
+    <h2>Check your email</h2>
+    <p>Enter the 6-digit code we sent to <b id="code-email"></b>.</p>
+    <p id="dev-code" class="hint" hidden></p>
+    <form id="code-form">
+      <label>Code <input id="code-input" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required></label>
+      <button type="submit">Sign in</button>
+      <button type="button" id="change-email" class="link">Use a different email</button>
+    </form>
+  </section>
+
+  <section id="dashboard" hidden>
+    <div class="card" id="push-card">
+      <h2>Alerts on this device</h2>
+      <p id="push-status">Checking…</p>
+      <div id="ios-help" class="hint" hidden>
+        On iPhone or iPad, push alerts only work from the Home Screen (iOS 16.4+):
+        tap <b>Share</b> → <b>Add to Home Screen</b>, then open Stock Checker from the new icon and tap “Enable alerts”.
+      </div>
+      <button id="enable-push" hidden>Enable alerts</button>
+      <button id="test-push" class="secondary" hidden>Send test</button>
+      <button id="disable-push" class="link" hidden>Turn off on this device</button>
+    </div>
+
+    <div class="card">
+      <h2>Add a watch</h2>
+      <form id="watch-form" class="grid">
+        <label>Retailer <select id="retailer"></select></label>
+        <label>SKU <input id="sku" required><small id="sku-hint"></small></label>
+        <label>ZIP <input id="zip" inputmode="numeric" maxlength="5" required placeholder="10001"></label>
+        <label>Radius (mi) <input id="radius" type="number" min="1" max="250" value="25"></label>
+        <label class="wide">Name (optional) <input id="product-name" placeholder="e.g. PS5 Pro"></label>
+        <button type="submit">Watch</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="row"><h2>Your watches</h2><button id="refresh" class="link">Refresh</button></div>
+      <ul id="watches" class="list"></ul>
+    </div>
+
+    <div class="card">
+      <h2>Alert history</h2>
+      <ul id="alerts" class="list"></ul>
+    </div>
+  </section>
+</main>
+<footer>Checks run every few minutes. Email is used as a backup when a push isn't confirmed.</footer>
+</body>
+</html>
