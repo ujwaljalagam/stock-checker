@@ -1,0 +1,27 @@
+# GitHub Actions workflow. To enable it, move this file to .github/workflows/build.yml
+# (pushing workflow files needs a token with the `workflow` scope).
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      # The Android SDK on GitHub's Ubuntu runners is picked up via ANDROID_HOME.
+      - name: Build server, web app, Android app and shared iOS klibs
+        run: >
+          ./gradlew --no-configuration-cache
+          :server:installDist
+          :webApp:wasmJsBrowserDistribution
+          :androidApp:assembleDebug
+          :shared:compileKotlinIosArm64 :shared:compileKotlinIosSimulatorArm64
