@@ -1,0 +1,30 @@
+# Gradle / Kotlin
+.gradle/
+build/
+.kotlin/
+!gradle/wrapper/gradle-wrapper.jar
+local.properties
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Server runtime data / secrets
+.env
+*.keys
+server/data/
+*.mv.db
+*.trace.db
+
+# iOS / Xcode
+iosApp/*.xcodeproj/
+iosApp/build/
+xcuserdata/
+DerivedData/
+*.xcworkspace/xcuserdata/
+Pods/
+
+# Web
+node_modules/
